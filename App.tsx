@@ -6,6 +6,7 @@ export default function App() {
   const [key, setKey] = useState("Estado Inicial!");
   const [style, setStyle] = useState(styles.keyText);
 
+  //embaralha o array antes de ser convertido para string
   const shuffle = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -52,8 +53,8 @@ export default function App() {
         </View>
         <View>
           <Text style={style}>{key}</Text>
-          <Button title="Gerar chave aleatória" onPress={generateKey} />
-          <Button title="Copiar Chave" />
+          <Button title="🔑 Generate Key" onPress={generateKey} />
+          <Button title="🔗 Copy" />
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
