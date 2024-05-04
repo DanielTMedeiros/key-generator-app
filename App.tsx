@@ -1,7 +1,14 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Text, View, Image, Button } from "react-native";
+import { useState } from "react";
 
 export default function App() {
+  const [key, SetKey] = useState("Inicial!");
+
+  const generateKey = () => {
+    SetKey("Apertado!");
+  };
+
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
@@ -13,8 +20,8 @@ export default function App() {
           />
         </View>
         <View>
-          <Text style={styles.keyText}>A CHAVE APARECE AQUI!</Text>
-          <Button title="Gerar chave aleatória" />
+          <Text style={styles.keyText}>{key}</Text>
+          <Button title="Gerar chave aleatória" onPress={generateKey} />
           <Button title="Copiar Chave" />
         </View>
       </SafeAreaView>
@@ -38,9 +45,10 @@ const styles = StyleSheet.create({
   keyText: {
     textAlign: "center",
     marginBottom: 50,
-    fontSize: 18,
-    color: "#fff",
-    backgroundColor: "pink",
+    fontSize: 20,
+    color: "#0f0f0f",
+    fontWeight: "600",
+    backgroundColor: "#FAE516",
     borderRadius: 10,
     padding: 5,
   },
@@ -48,7 +56,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     fontWeight: "800",
-
     color: "#fff",
   },
 });
