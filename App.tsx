@@ -6,7 +6,7 @@ export default function App() {
   const [key, setKey] = useState("Estado Inicial!");
   const [style, setStyle] = useState(styles.keyText);
 
-  //embaralha o array antes de ser convertido para string
+  //Funcao chamada em generateKey onde embaralha o array utilizando o algoritmo Fisher-Yates
   const shuffle = (array: any[]) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -15,12 +15,15 @@ export default function App() {
     return array;
   };
 
+  /*funcao que gera a chave aleatoria com base nos caracteres informados nas 3 constantes.
+  Serão gerados no mínimo um caractere aleatorio maiusculo e um caractere aleatorio especial
+  e os demais de forma aleatoria dentro dos disponiveis em characters.
+  em seguida embaralha o array e depois converte para string */
   const generateKey = () => {
     const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const specialChars = "!@#$%&*";
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
-
     let result = [];
 
     result.push(
@@ -29,7 +32,7 @@ export default function App() {
     result.push(
       specialChars.charAt(Math.floor(Math.random() * specialChars.length))
     );
-    for (let i = 0; i < 8; i++) {
+    for (let index = 0; index < 8; index++) {
       result.push(
         characters.charAt(Math.floor(Math.random() * characters.length))
       );
