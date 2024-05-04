@@ -1,10 +1,22 @@
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { useState } from "react";
+import * as Clipboard from "expo-clipboard";
 
 export default function App() {
-  const [key, setKey] = useState("Estado Inicial!");
+  const [key, setKey] = useState("Press Generate Key");
   const [style, setStyle] = useState(styles.keyText);
+
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(key);
+  };
 
   //Funcao chamada em generateKey onde embaralha o array utilizando o algoritmo Fisher-Yates
   const shuffle = (array: any[]) => {
@@ -56,8 +68,12 @@ export default function App() {
         </View>
         <View>
           <Text style={style}>{key}</Text>
-          <Button title="🔑 Generate Key" onPress={generateKey} />
-          <Button title="🔗 Copy" />
+          <TouchableOpacity onPress={generateKey}>
+            <Text style={styles.generateButton}>🔑 Generate Key</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={copyToClipboard}>
+            <Text style={styles.copyButton}>🔗 Copy</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -75,17 +91,19 @@ const styles = StyleSheet.create({
   image: {
     height: 250,
     width: 250,
-    marginBottom: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 12,
+    marginBottom: 28,
   },
   keyText: {
     textAlign: "center",
     textAlignVertical: "center",
     marginBottom: 50,
-    fontSize: 20,
+    fontSize: 22,
     color: "#0f0f0f",
     fontWeight: "600",
-    backgroundColor: "#FAE516",
-    borderRadius: 10,
+    backgroundColor: "#DBD012",
     padding: 12,
   },
 
@@ -93,17 +111,41 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     marginBottom: 50,
-    fontSize: 20,
+    fontSize: 22,
     color: "#0f0f0f",
     fontWeight: "600",
     backgroundColor: "#4AF947",
-    borderRadius: 10,
     padding: 12,
   },
   title: {
-    fontSize: 24,
+    fontSize: 36,
     textAlign: "center",
     fontWeight: "800",
+    marginBottom: 12,
+    color: "#DBA55B",
+  },
+
+  generateButton: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 20,
     color: "#fff",
+    padding: 12,
+    borderRadius: 10,
+    marginTop: 16,
+    marginBottom: 16,
+    backgroundColor: "#4C12DB",
+    fontWeight: "600",
+  },
+
+  copyButton: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 20,
+    color: "#fff",
+    padding: 12,
+    borderRadius: 10,
+    backgroundColor: "#1258DB",
+    fontWeight: "600",
   },
 });
