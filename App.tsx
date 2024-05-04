@@ -6,6 +6,14 @@ export default function App() {
   const [key, setKey] = useState("Estado Inicial!");
   const [style, setStyle] = useState(styles.keyText);
 
+  const shuffle = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const generateKey = () => {
     const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const specialChars = "!@#$%&*";
@@ -20,14 +28,15 @@ export default function App() {
     result.push(
       specialChars.charAt(Math.floor(Math.random() * specialChars.length))
     );
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
       result.push(
         characters.charAt(Math.floor(Math.random() * characters.length))
       );
     }
-    let finalResult = result.sort(() => Math.random() - 0.5).join("");
+    let finalResult = shuffle(result);
+    const finalKey = finalResult.join("");
 
-    setKey(finalResult.toString());
+    setKey(finalKey);
     setStyle(styles.keyTextPressed);
   };
 
