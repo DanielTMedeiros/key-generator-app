@@ -3,10 +3,18 @@ import { StyleSheet, Text, View, Image, Button } from "react-native";
 import { useState } from "react";
 
 export default function App() {
-  const [key, SetKey] = useState("Inicial!");
+  const [key, SetKey] = useState("Estado Inicial!");
 
   const generateKey = () => {
-    SetKey("Apertado!");
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*";
+    let result = "";
+    for (let i = 0; i < 10; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return SetKey(result);
   };
 
   return (
@@ -44,13 +52,14 @@ const styles = StyleSheet.create({
   },
   keyText: {
     textAlign: "center",
+    textAlignVertical: "center",
     marginBottom: 50,
     fontSize: 20,
     color: "#0f0f0f",
     fontWeight: "600",
     backgroundColor: "#FAE516",
     borderRadius: 10,
-    padding: 5,
+    padding: 12,
   },
   title: {
     fontSize: 24,
