@@ -6,6 +6,12 @@ export default function App() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         <View>
+          <Image
+            source={require("./assets/logo-app.png")}
+            style={styles.image}
+          />
+        </View>
+        <View>
           <Text>TEXTO AQUI</Text>
           <Button title="Gerar chave aleatória" />
           <Button title="Copiar" />
@@ -21,5 +27,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  image: {
+    height: 250,
+    width: 250,
+    marginTop: -250,
+    marginBottom: 18,
   },
 });
